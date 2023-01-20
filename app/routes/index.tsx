@@ -1,7 +1,18 @@
+import { useLoaderData } from "@remix-run/react";
+
+import {db} from '~/utils/db.server'
+
+export async function loader() {
+  const value = await db.test.findFirst()
+  return {value: value?.name};
+}
 export default function Index() {
+  const data = useLoaderData<typeof loader>();
+
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
       <h1>Welcome to Remix</h1>
+      <h2>{data?.value ? data.value : null}</h2>
       <ul>
         <li>
           <a
