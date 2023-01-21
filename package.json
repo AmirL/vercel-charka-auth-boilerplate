@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.5",
+    "@node-rs/bcrypt": "^1.6.2",
     "@prisma/client": "^4.9.0",
     "@remix-run/node": "^1.11.0",
     "@remix-run/react": "^1.11.0",
@@ -20,7 +21,9 @@
     "@vercel/node": "^2.6.2",
     "react": "^18.2.0",
     "react-dom": "latest",
-    "remix": "latest"
+    "remix": "latest",
+    "remix-auth": "^3.4.0",
+    "remix-auth-form": "^1.3.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.11.0",

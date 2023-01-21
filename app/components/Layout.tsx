@@ -9,11 +9,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <Container maxWidth="sm">
       <Box sx={{ my: 4 }}>{children}</Box>
-      <Button variant="contained" startIcon={<EditIcon />} color="secondary">
-        Edit
-      </Button>
-      &nbsp;
-      <Button variant="contained">Test</Button>
     </Container>
   );
 }

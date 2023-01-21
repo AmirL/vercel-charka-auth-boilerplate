@@ -1,13 +1,15 @@
-import { useLoaderData } from '@remix-run/react';
+import { Form, useLoaderData } from '@remix-run/react';
 
 import { db } from '~/utils/db.server';
 
-import { PrismaClient } from '@prisma/client';
+import authenticator, { requireUser } from '~/utils/auth.server';
+import type { LoaderArgs } from '@remix-run/node';
+import { Button } from '@mui/material';
 
-export async function loader() {
-  const value = await db.test.findFirst();
+export async function loader({ request }: LoaderArgs) {
+  const user = await requireUser(request);
 
-  return { value: value?.name };
+  return { value: user.email };
 }
 export default function Index() {
   const data = useLoaderData<typeof loader>();
@@ -17,23 +19,11 @@ export default function Index() {
       <h1>Welcome to Remix</h1>
       {/* <Button variant="contained">Hello World</Button> */}
       <h2>{data?.value ? data.value : null}</h2>
-      <ul>
-        <li>
-          <a target="_blank" href="https://remix.run/tutorials/blog" rel="noreferrer">
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/tutorials/jokes" rel="noreferrer">
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+      <Form action="/logout" method="post">
+        <Button variant="text" type="submit">
+          Logout
+        </Button>
+      </Form>
     </div>
   );
 }
